@@ -1,0 +1,24 @@
+语义化：
+
+```
+<body>
+    <header>……</header>
+    <article>
+        <header>……</header>
+        <section>……</section>
+        <section>……</section>
+        <section>……</section>
+        <footer>……</footer>
+    </article>
+    <article>
+        ……
+    </article>
+    <article>
+        ……
+    </article>
+    <footer>
+        <address></address>
+    </footer>
+</body>
+```
+
