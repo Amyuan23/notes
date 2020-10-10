@@ -1,10 +1,21 @@
-# Commit Message集成实践
+# Git Commit Message集成实践
 
-[优雅的提交你的 Git Commit Message](https://juejin.im/post/5afc5242f265da0b7f44bee4#heading-9)
+本篇文章是对【[优雅的提交你的 Git Commit Message](https://juejin.im/post/5afc5242f265da0b7f44bee4#heading-9)】的实践总结
+
+用于保障项目 commit message 的规范和格式化
+
+好的习惯，受益终身
 
 ## 格式
 
-- type: commit 的类型
+可以看看[angular提交记录](https://github.com/angular/angular.js/commits/master)
+
+> 示例:
+> chore(docs.angularjs.org): upgrade Firebase libraries
+> 类型（修改的文件）：改了啥
+
+
+一般来说，需要对我们的提交内容进行以下几种类型的划分，从而使得每次的代码变更都十分清晰。
 
 - feat: 新特性
 
@@ -22,34 +33,34 @@
 
 - scope: commit 影响的范围, 比如: route, component, utils, build...
 
-- subject: commit 的概述, 建议符合  [50/72 formatting](https://link.zhihu.com/?target=https%3A//stackoverflow.com/questions/2290016/git-commit-messages-50-72-formatting)
+  
 
-- body: commit 具体修改内容, 可以分为多行, 建议符合 [50/72 formatting](https://link.zhihu.com/?target=https%3A//stackoverflow.com/questions/2290016/git-commit-messages-50-72-formatting)
+## 使用工具 自动生成指定的格式
 
-- footer: 一些备注, 通常是 BREAKING CHANGE 或修复的 bug 的链接.
+自己写提交信息，很有可能在空格、拼写、顺序等方面出现不统一
+
+从工程化角度来说，使用工具，规范我们的每一次提交是有必要的
 
 
 
-## Commitizen: 使用工具自动生成指定的格式
-
-[commitizen/cz-cli](https://github.com/commitizen/cz-cli)
+这里，我们使用 [commitizen/cz-cli](https://github.com/commitizen/cz-cli) ：
 
 ### 全局安装
 
-```
+```sh
 npm install commitizen -g
 ```
 
 adapter安装，可以理解为一个commit 规范预设 preset
 
-```
+```sh
 npm install -g cz-conventional-changelog
 echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc
 ```
 
 ### 项目级安装
 
-```
+```sh
 npm install -D commitizen cz-conventional-changelog
 ```
 
@@ -73,9 +84,9 @@ package.json中配置:
 
 全局 或 项目级别安装:
 
-```
+```sh
 npm i -g cz-customizable
-or
+# or
 npm i -D cz-customizable
 ```
 
@@ -92,7 +103,7 @@ or
 ```
 
 同时在~/ 或项目目录下创建 .cz-config.js 文件, 维护你想要的格式
-```
+```powershell
 vim ~/.cz-config.js 
 ```
 
@@ -151,7 +162,7 @@ module.exports = {
 
 ### 用法
 
-```
+```sh
 git cz
 ```
 
@@ -159,13 +170,23 @@ git cz
 
 ## [commitlint](https://github.com/conventional-changelog/commitlint) :校验是否符合规范
 
-如果我们提交的不符合指向的规范, 直接拒绝提交，需要配置[commitlint](https://github.com/conventional-changelog/commitlint)
+`git cz`只是为提交代码增添一种方式，我们仍可以用`git commit`提交代码。
 
-```
+这样一来，仍然无法避免提交不规范的信息。
+
+因此，需要当我们提交的不符合规范的信息时, 直接拒绝提交。
+
+
+
+这里，我们使用[commitlint](https://github.com/conventional-changelog/commitlint)来校验提交信息
+
+安装：
+
+```powershell
 npm install --save-dev @commitlint/cli
 ```
 
-```
+```powershell
 npm i --save-dev @commitlint/config-conventional
 
 # Configure commitlint to use conventional config
@@ -174,7 +195,7 @@ echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitl
 
 package.json
 
-```
+```json
 {
   "husky": {
     "hooks": {
