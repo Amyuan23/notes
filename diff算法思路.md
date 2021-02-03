@@ -15,3 +15,4 @@
     - 如果`oldVnode`没有子节点而`Vnode`有，则将`Vnode`的子节点真实化之后添加到`el`
     - 如果两者都有子节点，则执行`updateChildren`函数比较子节点，这一步很重要
       - 分别对`oldS、oldE、S、E`两两做`sameVnode`比较，有四种比较方式，当其中两个能匹配上那么真实dom中的相应节点会移到Vnode相应的位置
+
